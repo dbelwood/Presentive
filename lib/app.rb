@@ -159,7 +159,7 @@ class App < Sinatra::Base
 	get '/presentations/:presentation_id/slides/:slide_index/parts/_new' do
 		@presentation = Presentation.find(params[:presentation_id])
 		@slide = @presentation.slides[params[:slide_index].to_i]
-		@part = @slide.parts.build(:slide_type => :markdown)
+		@part = @slide.slide_parts.build(:slide_type => :markdown)
 		haml :new_slide_part
 	end
 	
@@ -167,12 +167,8 @@ class App < Sinatra::Base
 		@presentation = Presentation.find(params[:presentation_id])
 		@slide = @presentation.slides[params[:slide_index].to_i]
 
-		LOGGER.info request.params
-		LOGGER.info params[:slide_type].to_sym
-
 		begin
 			if (params[:slide_type] == "image")
-				LOGGER.info "Creating an image"
 				part = @slide.slide_parts.create!(:slide_type => params[:slide_type].to_sym, :image => params[:file])
 			else
 				part = @slide.slide_parts.create!(:slide_type => params[:slide_type].to_sym, :content => params[:content])
