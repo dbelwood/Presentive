@@ -20,7 +20,7 @@ mongoid_settings = YAML::load(File.open(File.join(File.dirname(__FILE__), "/mong
 
 require 'carrierwave/mongoid'
 CarrierWave.configure do |config|
-  config.grid_fs_database = mongoid_settings[ENV['RACK_ENV']]["database"]
-  config.grid_fs_host = mongoid_settings[ENV['RACK_ENV']]["hostname"]
+  config.grid_fs_connection = Mongoid.database
   config.grid_fs_access_url = "/images"
+  config.cache_dir = File.join(File.dirname(__FILE__), '../tmp')
 end
