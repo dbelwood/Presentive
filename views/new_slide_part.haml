@@ -1,0 +1,31 @@
+%h1 New Slide Part
+%form{:method => 'post', :action => "/presentations/#{@presentation.id}/slides/#{@slide.position}/parts", :enctype => "multipart/form-data"}
+	%fieldset
+		%legend Slide Part Fields
+
+		%label{:for => 'type'} Type
+		%select{:name => 'slide_type', :id => 'slide_type'}
+			%option{:value => "markdown", :selected => "#{@part.slide_type=='markdown'}"} Markdown
+			%option{:value => "image", :selected => "#{@part.slide_type=='markdown'}"} Image
+		%br/
+
+		%span{:id => "content"}
+			%label{:for => 'content'} Content
+			%textarea{:cols => 80, :rows => 10, :name => 'content', :value => "#{@part.content}"}
+			%a{:href => "http://daringfireball.net/projects/markdown/syntax", :target => "_blank"} Markdown Syntax
+			%br/
+
+		%span{:id => "file"}
+			%label{:for => 'image'} Image
+			%input{:type => "file", :name => "file", :value => "#{@part.image.path}"}
+	
+	%input{:type => "submit", :value => "Save"}
+	%a{:href => "/presentations/#{@presentation.id}/slides/#{@slide.position}"} Cancel
+
+	%script{:type => "text/javascript", :src => "/js/jquery-1.6.2.min.js"}
+	:javascript
+		$(function() {
+			$("#type").change(function() {
+				
+			});
+		});

@@ -1,0 +1,14 @@
+%h1 New Presentation
+%form{:method => 'post', :action => '/presentations'}
+	%fieldset
+		%legend Presentation Fields
+
+		%label{:for => 'name'} Name
+		%input{:type => 'text', :name => 'name'}
+		%br/
+
+		%lable{:for => 'author'} Author
+		%input{:type => 'text', :name => 'author'}
+	
+	%input{:type => "submit", :value => "Save"}
+	%a{:href => "/presentations"} Cancel

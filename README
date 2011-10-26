@@ -1,0 +1,138 @@
+Presently
+----------
+Manages and play presentations
+Resources
+	Presentation
+	Slide
+	SlidePart
+
+A User has many Presentation
+A Presentation has many Slides
+A Slide has many SlideParts
+
+A SlidePart can be markdown or an image
+
+Routes
+	/presentations
+		GET
+		POST
+	/presentations/:presentation_id
+		GET
+		PUT
+		DELETE
+	/presentations/:presentation_id/slides
+		GET
+		POST
+	/presentations/:presentation_id/slides/:slide_id
+		GET
+		PUT
+		DELETE
+	/presentations/:presentation_id/slides/:slide_id/parts
+		GET
+		POST
+	/presentations/:presentation_id/slides/:slide_id/parts/:part_id
+		GET
+		PUT
+		DELETE
+
+Features
+--------
+	Basic
+		Create Presentation - DONE
+		Create Slide - DONE
+		Add Markdown to Slide - DONE
+		Add Image to Slide - DONE
+		Remove Slide - DONE
+		Move Slides in a Presentation
+		Move Slide Parts in a Slide
+		Delete Presentation
+		View Presentation - DONE
+	Facebook
+		Facebook login - DONE
+		Like a presentation
+		Publish a presentation to a wall/feed
+	Advanced
+		Presentation API
+		Download Presentation as JSON
+		Store documents in the cloud (Mongo?)
+
+Slides - target time: 45 min
+----------------------------
+15 slides - 3 mins a piece
+1 - Who am I
+	Dan Belwood
+	Technical Architect, Model Metrics
+	Force.com Developer
+	Ruby Developer
+	Javascript Developer
+
+2 - Agenda
+	image: 
+3 - What is Heroku all about
+	image: The heroku diagram
+4 - Deployments are tough, administering servers sucks
+	* I build apps, not servers
+	* Capistrano/Vlad
+	* Chef
+	* WARs/EARs
+	image: Crying baby?
+5 - Deploy vs Distribute
+	* Version control is the distribution
+	* Installation is instantaneous
+	* Don't worry about different server installations
+
+6 - <Demo> Deploy an app to heroku
+	image: git push heroku master
+7 - Continous Deployment
+	image: 
+8 - <Demo> Show Presentation
+	image: 
+9 - Add-ons, what's it about
+	image: 
+10 - MongoHQ
+	image: 
+11 - <Demo> Add MongoHQ and re-deploy
+	image: 
+12 - 
+	image: 
+13 - Social
+	image: 
+14 - Facebook Features
+	* Heroku apps hosted in Facebook
+	* Heroku apps that use the OpenGraph API
+	image: Facebook logo
+15 - <Demo> Publish a presentation to Facebook
+	image: 
+16 - Working with Force.com
+	* Database.com will increasingly become the platform of choice for business processes
+	* Expose your business to your customers where they are - the social web
+	* World-class security, workflow and the agility of Heroku
+	image: 
+18 - What's next
+	* What happens when this gets popular
+	* What happens when we want to distribute this out of the website
+	* I've got so many presentations I want to search for them
+	image: 
+19 - Move the application to NodeJS
+	* Segregate creation/viewing of presentations
+	* Express.js, hamljs
+	image: NodeJS graphic
+20 - DocRaptor, rendering PDFs
+	image: DocRaptor graphic
+21 - TikaServer on Java with Flying Sphinx
+	* Extract the contents
+	* Store in a full-text search index
+	image: Flying Sphinx logo
+22 - Embrace Asynchronicity
+	* Eventual Consistency
+	* Resque as Event-driven messaging
+23 - Procfile
+	* Coordinate at the process level
+	* Scale processes individually
+	* A process does one thing and does it well
+24 - The Composite Architecture
+	* Process orchestration
+	* Integration at the API level, the simpler the better
+	* Queueing and Resource absraction
+25 - Thank you
+	

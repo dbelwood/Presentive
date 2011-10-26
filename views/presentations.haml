@@ -1,0 +1,28 @@
+%h1 Presentations
+#presentations
+	%ul
+		- @presentations.each do |p|
+			%li
+				%form{:id=>"delete_presentation_#{p.id}", :method => "POST", :action => "/presentations/#{p.id}"}
+					%input{:type=>"hidden", :name=>"_method", :value=>"DELETE"}
+				.title 
+					%a{:href => "/presentations/#{p.id}"}= p.name
+				.author= p.author
+				.links
+					%a{:href => "/presentations/#{p.id}/view", :target => "_blank"} View
+					%a{:href => "#", :onclick => "javascript:delete_presentation('#{p.id}');"} Del
+
+		- if @presentations.length == 0
+			%span There are no presentations.
+	#buttons
+		%button{:onclick => "window.location = '/presentations/_new';"} New
+
+%script{:type => "text/javascript", :src => "/js/jquery-1.6.2.min.js"}
+:javascript
+	function delete_presentation(presentation_id) {
+		var deleted = confirm('Are you sure?');
+		if (deleted)
+			$("#delete_presentation_"+presentation_id).submit();
+		
+		return true;
+	}

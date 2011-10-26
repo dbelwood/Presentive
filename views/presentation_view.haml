@@ -1,0 +1,43 @@
+!!! Strict
+%html{:xml => "http://www.w3.org/1999/xhtml"}
+	%head
+		%title= @presentation.name
+		<!-- metadata -->
+		%meta{:name => "generator", :content => "S5"}
+		%meta{:name => "version", :content => "S5"}
+		%meta{:name => "presdate", :content => "S5"}
+		%meta{:name => "author", :content => "#{@presentation.author}"}
+		%meta{:name => "company", :content => "S5"}
+		<!-- configuration parameters -->
+		%meta{:name => "defaultView", :content => "slideshow"}
+		%meta{:name => "controlVis", :content => "hidden"}
+
+		<!-- style sheet links -->
+		%link{:rel => "stylesheet", :href => "/css/slides.css", :type => "text/css", :media => "projection", :id => "slideProj"}
+		%link{:rel => "stylesheet", :href => "/css/outline.css", :type => "text/css", :media => "screen", :id => "outlineStyle"}
+		%link{:rel => "stylesheet", :href => "/css/print.css", :type => "text/css", :media => "print", :id => "slidePrint"}
+		%link{:rel => "stylesheet", :href => "/css/opera.css", :type => "text/css", :media => "projection", :id => "operaFix"}
+		%link{:rel => "stylesheet", :href => "/css/pretty.css", :type => "text/css", :media => "projection", :id => "pretty"}
+		
+		<!-- S5 JS -->
+		%script{:src => "/js/slides.js", :type => "text/javascript"}
+	
+	%body
+		.layout
+			#controls
+			#currentSlide
+			#header
+			#footer
+				%h1 10/26/2010
+				%h2= @presentation.name
+
+		.presentation
+			- @presentation.slides.each do |s|
+				.slide
+					%h1= s.title
+					%h2= s.subtitle
+					- s.slide_parts.each do |p|
+						- if p.slide_type == :markdown
+							#{p.content_html}
+						- else
+							%img{:src => "#{p.image.url}"}

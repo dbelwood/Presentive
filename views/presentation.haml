@@ -1,0 +1,27 @@
+%a{:href => "/presentations"} Back to Presentations
+%h1 Presentation #{@presentation.name}
+%h2 by #{@presentation.author}
+
+#slides
+	%ul
+		- @presentation.slides.each do |s|
+			%li
+				%span
+					%a{:href=>"/presentations/#{@presentation.id}/slides/#{s.position}"}= s.title
+				%span
+					%form{:id=>"delete_slide_#{s.position}", :method => "POST", :action => "/presentations/#{@presentation.id}/slides/#{s.position}"}
+						%input{:type=>"hidden", :name=>"_method", :value=>"DELETE"}
+						%a{:href => "#", :onclick => "javascript:delete_slide('#{s.position}');"} Del
+	- if @presentation.slides.length == 0
+		%span There are no slides.
+	#buttons
+		%button{:onclick => "window.location = '/presentations/#{@presentation.id}/slides/_new';"} New
+%script{:type => "text/javascript", :src => "/js/jquery-1.6.2.min.js"}
+:javascript
+	function delete_slide(slide_id) {
+		var deleted = confirm('Are you sure?');
+		if (deleted)
+			$("#delete_slide_"+slide_id).submit();
+		
+		return true;
+	}
