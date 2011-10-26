@@ -19,6 +19,7 @@ class App < Sinatra::Base
 		haml :home
 	end
 
+	# Authorization paths
 	get '/auth/facebook/callback' do
 		session['fb_auth'] = request.env['omniauth.auth']
   		session['fb_token'] = session['fb_auth']['credentials']['token']
@@ -42,6 +43,8 @@ class App < Sinatra::Base
   		session['fb_token'] = nil
   		session['fb_error'] = nil
 	end
+
+	# -------------------------------- #
 
 	get '/presentations' do
 		@presentations = Presentation.all
@@ -156,6 +159,7 @@ class App < Sinatra::Base
 	get '/presentations/:presentation_id/slides/:slide_index/parts/_new' do
 		@presentation = Presentation.find(params[:presentation_id])
 		@slide = @presentation.slides[params[:slide_index].to_i]
+		@part = @slide.parts.build(:slide_type => :markdown)
 		haml :new_slide_part
 	end
 	
@@ -217,5 +221,12 @@ class App < Sinatra::Base
 			# ERROR !
 			halt 500, e.to_s
 		end
+	end
+
+	# Serve images
+	get '/images/uploads/:file_name' do
+		gridfs_file = Mongo::GridFileSystem.new(Mongoid.database).open("uploads/#{params[:file_name]}", 'r')
+		content_type gridfs_file.content_type
+		gridfs_file.read
 	end
 end

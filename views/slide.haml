@@ -2,25 +2,25 @@
 %h1 #{@slide.title}
 %h2 #{@slide.subtitle}
 
-#slide_parts
-	%ul#parts
-		- @slide.slide_parts.each do |p|
-			%li.draggable
+#parts
+	- @slide.slide_parts.each do |p|
+		.part
+			.contents
 				- if p.slide_type == :image
 					%img{:src => "#{p.image.url}"}
 				-else
-					.markdown= p.content_html
-				.slide_part_controls
-					%a{:href => "/presentations/#{@presentation.id}/slides/#{@slide.position}/parts/#{p.position}/_edit", :class => "edit_image"} Edit
-					%a{:href => "#", :onclick => "javascript:delete_slide_part('#{p.position}');", :class => "del_image"} Del
-				%form{:id=>"delete_slide_part_#{p.position}", :method => "POST", :action => "/presentations/#{@presentation.id}/slides/#{@slide.position}/parts/#{p.position}"}
-					%input{:type=>"hidden", :name=>"_method", :value=>"DELETE"}			
+					#{p.content_html}
+			.controls
+				%a{:href => "/presentations/#{@presentation.id}/slides/#{@slide.position}/parts/#{p.position}/_edit", :class => "edit_image"} Edit
+				%a{:href => "#", :onclick => "javascript:delete_slide_part('#{p.position}');", :class => "del_image"} Del
+			%form{:id=>"delete_slide_part_#{p.position}", :method => "POST", :action => "/presentations/#{@presentation.id}/slides/#{@slide.position}/parts/#{p.position}"}
+				%input{:type=>"hidden", :name=>"_method", :value=>"DELETE"}			
 
-	- if @slide.slide_parts.length == 0
-		%span This slide is empty.
-	.clear
-	#buttons
-		%button{:onclick => "window.location = '/presentations/#{@presentation.id}/slides/#{@slide.position}/parts/_new';"} New Slide Part
+- if @slide.slide_parts.length == 0
+	%span This slide is empty.
+.clear
+#buttons
+	%button{:onclick => "window.location = '/presentations/#{@presentation.id}/slides/#{@slide.position}/parts/_new';"} New Slide Part
 %script{:type => "text/javascript", :src => "/js/jquery-1.6.2.min.js"}
 %script{:type => "text/javascript", :src => "https://ajax.googleapis.com/ajax/libs/jqueryui/1.8.16/jquery-ui.min.js"}
 :javascript
@@ -42,33 +42,27 @@
 		return true;
 	}
 :css
-	.draggable {
-		border: 1px #eee solid;
+	#parts {
+		padding: 5px;
+	}
+
+	.part {
+		border: 2px #eee solid;
 		width: 600px;
 		padding: 2px;
 		margin-bottom: 5px;
+		padding-top: 5px;
+		overflow: auto;
 	}
 
-	.ui-draggable-dragging {
-		background: green;
-	}
-
-	.draggable img {
+	.contents {
 		float: left;
+		width: 80%;
 	}
 
-	.draggable .markdown {
-		/* float: left; */
-	}
-
-	.slide_part_controls {
-		float: right;
-		position:relative;
-		right:10px;
-	}
-
-	.draggable form {
-		margin-left: 10px;
+	.controls {
+		width:20%;
+		float: left;
 	}
 
 	.clear {
