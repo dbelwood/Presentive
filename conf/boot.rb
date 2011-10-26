@@ -11,7 +11,7 @@ LOGGER = Logger.new(File.join(File.dirname(__FILE__), "/../log/#{ENV['RACK_ENV']
 
 # Load Mongoid
 require 'mongoid'
-ENV['MONGOHQ_URI'] = 'mongodb://heroku:2e4ba6ec89454c34b40a91aa83199b52@staff.mongohq.com:10019/app1596996'
+ENV['MONGOHQ_URI'] = 'mongodb://heroku:e09c1cdcb07ec5c9cf076497d82eb9e3@staff.mongohq.com:10019/app1607076'
 Mongoid.load!(File.join(File.dirname(__FILE__), "/mongoid.yml"))
 Mongoid.logger = LOGGER unless (ENV['RACK_ENV'] == 'production')
 
