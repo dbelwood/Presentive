@@ -6,7 +6,7 @@ ENV['RACK_ENV'] ||= 'development'
 
 # Load Mongoid
 require 'mongoid'
-ENV['MONGOHQ_URI'] = 'mongodb://heroku:e09c1cdcb07ec5c9cf076497d82eb9e3@staff.mongohq.com:10019/app1607076'
+ENV['MONGOHQ_URI'] = 'mongodb://heroku:b002764d51c0524e8f45fcd88cda3c1c@staff.mongohq.com:10028/app1609127'
 Mongoid.load!(File.join(File.dirname(__FILE__), "/mongoid.yml"))
 #Mongoid.logger = LOGGER unless (ENV['RACK_ENV'] == 'production')
 
