@@ -7,4 +7,4 @@ test:
   database: presentations_test
 
 production:
-  uri: <%= ENV['MONGOHQ_URI'] %>
+  uri: <%= ENV['MONGOHQ_URL'] %>
