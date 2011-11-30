@@ -8,6 +8,7 @@ gem "carrierwave-mongoid"
 gem "oa-oauth"
 gem "rdiscount"
 gem "thin"
+gem "rest-client"
 
 group :development, :test do
 	gem "rspec"

@@ -225,4 +225,9 @@ class App < Sinatra::Base
 		content_type gridfs_file.content_type
 		gridfs_file.read
 	end
+
+	# Facebook actions
+	get '/presentations/:presentation_id/publish' do
+		
+	end
 end
